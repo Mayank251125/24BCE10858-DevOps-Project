@@ -40,8 +40,8 @@ public class GraphiteConfiguration {
 
             @Override
             public boolean enabled() {
-                // Only push metrics if GRAPHITE_HOST env var is set (e.g., inside Docker/K8s)
-                return System.getenv("GRAPHITE_HOST") != null;
+                // Enabled by default to push metrics to Graphite Carbon
+                return true;
             }
         };
     }
