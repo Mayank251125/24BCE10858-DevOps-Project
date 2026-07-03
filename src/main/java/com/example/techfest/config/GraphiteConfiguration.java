@@ -46,6 +46,12 @@ public class GraphiteConfiguration {
             }
 
             @Override
+            public boolean graphiteTagsEnabled() {
+                // Disable tags so that metrics are exported as flat hierarchical paths
+                return false;
+            }
+
+            @Override
             public boolean enabled() {
                 // Enabled by default to push metrics to Graphite Carbon
                 return true;

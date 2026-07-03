@@ -168,7 +168,7 @@
       },
       "targets": [
         {
-          "target": "scale(jvm.memory.used, 0.00000095367)",
+          "target": "scale(sumSeries(jvmMemoryUsed.area.heap.id.*), 0.00000095367)",
           "refId": "A"
         }
       ],
