@@ -168,7 +168,7 @@
       },
       "targets": [
         {
-          "target": "scale(sumSeries(jvmMemoryUsed.area.heap.id.*), 0.00000095367)",
+          "target": "scale(sumSeries(jvm.memory.used.area.heap.id.*), 0.00000095367)",
           "refId": "A"
         }
       ],
@@ -178,6 +178,94 @@
             "drawStyle": "line"
           },
           "unit": "mbytes"
+        }
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 12
+      },
+      "id": 6,
+      "title": "Application Uptime",
+      "type": "stat",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
+      "targets": [
+        {
+          "target": "process.uptime",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 12
+      },
+      "id": 7,
+      "title": "Free Disk Space",
+      "type": "gauge",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
+      "targets": [
+        {
+          "target": "disk.free.path.*",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decbytes"
+        }
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 12
+      },
+      "id": 8,
+      "title": "Network Traffic (Tomcat Bytes)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
+      "targets": [
+        {
+          "target": "tomcat.global.sent",
+          "refId": "A"
+        },
+        {
+          "target": "tomcat.global.received",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line"
+          },
+          "unit": "decbytes"
         }
       }
     }

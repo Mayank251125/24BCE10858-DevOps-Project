@@ -6,7 +6,11 @@ import io.micrometer.graphite.GraphiteMeterRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
+import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics;
+import io.micrometer.core.instrument.binder.system.ProcessorMetrics;
 import io.micrometer.graphite.GraphiteProtocol;
+import io.micrometer.core.instrument.config.NamingConvention;
 import java.time.Duration;
 
 @Configuration
@@ -62,12 +66,22 @@ public class GraphiteConfiguration {
     @Bean
     public GraphiteMeterRegistry graphiteMeterRegistry(GraphiteConfig config) {
         GraphiteMeterRegistry registry = new GraphiteMeterRegistry(config, Clock.SYSTEM);
-        
-        // Explicitly bind JVM and System metric binders to ensure they are registered
-        new io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics().bindTo(registry);
-        new io.micrometer.core.instrument.binder.jvm.JvmGcMetrics().bindTo(registry);
-        new io.micrometer.core.instrument.binder.system.ProcessorMetrics().bindTo(registry);
-        
+        registry.config().namingConvention(NamingConvention.dot);
         return registry;
+    }
+
+    @Bean
+    public JvmMemoryMetrics jvmMemoryMetrics() {
+        return new JvmMemoryMetrics();
+    }
+
+    @Bean
+    public JvmGcMetrics jvmGcMetrics() {
+        return new JvmGcMetrics();
+    }
+
+    @Bean
+    public ProcessorMetrics processorMetrics() {
+        return new ProcessorMetrics();
     }
 }
