@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "vit-taskmanager-app"
+        IMAGE_NAME = "vit-techfest-app"
         IMAGE_TAG = "latest"
     }
 
@@ -87,7 +87,7 @@ pipeline {
         stage('Verify Deployment') {
             steps {
                 echo "Checking Deployment..."
-                bat 'kubectl rollout status deployment/vit-taskmanager-deployment'
+                bat 'kubectl rollout status deployment/vit-techfest-deployment'
                 bat 'kubectl get deployments'
                 bat 'kubectl get pods'
                 bat 'kubectl get svc'

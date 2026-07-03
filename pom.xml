@@ -11,9 +11,9 @@
     </parent>
     
     <groupId>com.example</groupId>
-    <artifactId>taskmanager</artifactId>
+    <artifactId>techfest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>taskmanager</name>
+    <name>techfest</name>
     <description>Task Manager DevOps Project in Java</description>
     
     <properties>

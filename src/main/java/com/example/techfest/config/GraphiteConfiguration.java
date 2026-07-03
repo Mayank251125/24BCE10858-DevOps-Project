@@ -1,4 +1,4 @@
-package com.example.taskmanager.config;
+package com.example.techfest.config;
 
 import io.micrometer.core.instrument.Clock;
 import io.micrometer.graphite.GraphiteConfig;

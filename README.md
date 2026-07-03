@@ -1,5 +1,5 @@
-# DevOps Assignment 2 | Use Case 2: Task Manager Web Application
-**Application Name:** TaskManager Dashboard  
+# DevOps Assignment 2 | Use Case 2: TechFest Web Application
+**Application Name:** TechFest Dashboard  
 **Course:** DevOps (Assignment-2)  
 **Student Name:** Mayank Joshi  
 **Register Number:** 24BCE10858  
@@ -22,7 +22,7 @@
 
 ## 2. Restructured Directory Layout
 
-The application has been restructured into a Spring Boot MVC and CRUD Task Manager Java application compiled using **Maven Wrapper** and connected to a Graphite server:
+The application has been restructured into a Spring Boot MVC and CRUD TechFest Java application compiled using **Maven Wrapper** and connected to a Graphite server:
 
 ```text
 24BCE10858_Mayank_Joshi_DevOps_Project/
@@ -37,8 +37,8 @@ The application has been restructured into a Spring Boot MVC and CRUD Task Manag
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── com/example/taskmanager/
-│   │   │       ├── TaskmanagerApplication.java # Spring Boot main startup class
+│   │   │   └── com/example/techfest/
+│   │   │       ├── TechfestApplication.java # Spring Boot main startup class
 │   │   │       ├── config/
 │   │   │       │   └── GraphiteConfiguration.java # Telemetry Graphite connection class
 │   │   │       ├── controller/
@@ -59,8 +59,8 @@ The application has been restructured into a Spring Boot MVC and CRUD Task Manag
 │   │
 │   └── test/
 │       └── java/
-│           └── com/example/taskmanager/
-│               └── TaskmanagerApplicationTests.java # Context loading Junit test
+│           └── com/example/techfest/
+│               └── TechfestApplicationTests.java # Context loading Junit test
 │
 ├── Dockerfile             # Multi-Stage Dockerfile (compiles with mvnw, JRE runtime)
 ├── docker-compose.yml     # local orchestrator setting ports and environments (8082:8081)
@@ -144,7 +144,7 @@ kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 
 # 3. Check deployment status
-kubectl rollout status deployment/vit-taskmanager-deployment
+kubectl rollout status deployment/vit-techfest-deployment
 ```
 Access the application on your cluster nodes at `http://[node-ip]:30080`.
 

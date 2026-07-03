@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vit-taskmanager-deployment
+  name: vit-techfest-deployment
   labels:
-    app: vit-taskmanager
+    app: vit-techfest
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: vit-taskmanager
+      app: vit-techfest
   template:
     metadata:
       labels:
-        app: vit-taskmanager
+        app: vit-techfest
     spec:
       containers:
-      - name: vit-taskmanager-container
-        image: vit-taskmanager-app:latest
+      - name: vit-techfest-container
+        image: vit-techfest-app:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8081
