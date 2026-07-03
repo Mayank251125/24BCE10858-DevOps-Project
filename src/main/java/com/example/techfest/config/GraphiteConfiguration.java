@@ -6,6 +6,7 @@ import io.micrometer.graphite.GraphiteMeterRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import io.micrometer.graphite.GraphiteProtocol;
 import java.time.Duration;
 
 @Configuration
@@ -30,6 +31,12 @@ public class GraphiteConfiguration {
             public int port() {
                 // Default carbon plain text port
                 return 2003;
+            }
+
+            @Override
+            public GraphiteProtocol protocol() {
+                // Use PLAINTEXT protocol for port 2003
+                return GraphiteProtocol.PLAINTEXT;
             }
 
             @Override
