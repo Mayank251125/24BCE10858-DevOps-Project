@@ -11,4 +11,4 @@ services:
     restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - GRAPHITE_HOST=localhost
+      - GRAPHITE_HOST=host.docker.internal
