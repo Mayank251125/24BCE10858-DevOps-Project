@@ -10,9 +10,9 @@
 
 | Sl. No. | Submission Item | Description | Link / Status |
 |---|---|---|---|
-| **1** | **GitHub Repository Link** | Link to the complete source code repository. | `https://github.com/MayankJoshi251125/24BCE10858-DevOps-Project` |
+| **1** | **GitHub Repository Link** | Link to the complete source code repository. | `https://github.com/Mayank251125/24BCE10858-DevOps-Project` |
 | **2** | **Jenkins Build URL** *(if accessible)* | URL of successful Jenkins job or pipeline console output. | `http://localhost:8080/job/vit-techfest-pipeline/` (Screenshots in `/screenshots/jenkins/`) |
-| **3** | **Docker Hub Link** *(Optional)* | Repository link if image is pushed to Docker Hub. | `https://hub.docker.com/r/MayankJoshi251125/vit-techfest-app` |
+| **3** | **Docker Hub Link** *(Optional)* | Repository link if image is pushed to Docker Hub. | `https://hub.docker.com/r/Mayank251125/vit-techfest-app` |
 | **4** | **Application URL** | Deployed application URL (local port or cloud load balancer IP). | Local (JVM): `http://localhost:8081` / Local (Docker): `http://localhost:8082` / K8s: `http://localhost:30080` |
 | **5** | **Grafana Dashboard Screenshot** | Screenshot showing system performance and metrics panels. | Saved in `screenshots/grafana_dashboard.png` |
 | **6** | **Nagios Monitoring Screenshot** | Screenshot showing host state UP and HTTP service state OK. | Saved in `screenshots/nagios_status.png` |
