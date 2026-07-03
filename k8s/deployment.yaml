@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vit-taskmanager-deployment
+  labels:
+    app: vit-taskmanager
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vit-taskmanager
+  template:
+    metadata:
+      labels:
+        app: vit-taskmanager
+    spec:
+      containers:
+      - name: vit-taskmanager-container
+        image: vit-taskmanager-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8081
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "300m"
+        livenessProbe:
+          httpGet:
+            path: /index.html
+            port: 8081
+          initialDelaySeconds: 20
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 10

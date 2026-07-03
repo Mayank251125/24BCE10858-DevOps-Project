@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Schedule | VIT TechFest 2026</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-laptop-code"></i>
+            <span>VIT TechFest</span>
+        </div>
+        <button class="menu-btn" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="speakers.html">Speakers</a></li>
+            <li><a href="schedule.html" class="active">Schedule</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="tasks.html">Tasks</a></li>
+            <li><a href="register.html" style="background:#38bdf8; padding:8px 20px; border-radius:20px; color:white;">Register</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="section-header">
+                <h1>Symposium Schedule</h1>
+                <p>Plan your TechFest experience. Filter the events below by track to find what aligns with your interests.</p>
+            </div>
+
+            <!-- Schedule Filters -->
+            <div class="schedule-filter">
+                <button class="filter-btn active" data-filter="all">All Tracks</button>
+                <button class="filter-btn" data-filter="coding">Coding</button>
+                <button class="filter-btn" data-filter="hacking">Hacking</button>
+                <button class="filter-btn" data-filter="cyber">CyberSec</button>
+                <button class="filter-btn" data-filter="robotics">Robotics</button>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">09:00 AM</div>
+                    <div class="timeline-content">
+                        <h3>Opening Ceremony & Keynote</h3>
+                        <p>Welcome address by the Chancellor followed by Dr. Aris Thorne's address on "Building Sustainable Artificial Intelligence Models".</p>
+                        <span class="track-tag">Keynote</span>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">10:30 AM</div>
+                    <div class="timeline-content">
+                        <h3>HackFest Kickoff</h3>
+                        <p>Release of problem statements, team verification, server access distribution, and coding guidelines rollout.</p>
+                        <span class="track-tag">Hacking</span>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">02:00 PM</div>
+                    <div class="timeline-content">
+                        <h3>Speed Code-A-Thon</h3>
+                        <p>Round 1 of algorithm compilation challenges testing raw complexity analysis and optimization skills.</p>
+                        <span class="track-tag">Coding</span>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">10:00 AM</div>
+                    <div class="timeline-content">
+                        <h3>Capture The Flag (CTF)</h3>
+                        <p>Live cybersecurity challenges focusing on reverse engineering, payload exploitation, and cryptography checks.</p>
+                        <span class="track-tag">CyberSec</span>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">11:30 AM</div>
+                    <div class="timeline-content">
+                        <h3>RoboWars Arena Match</h3>
+                        <p>Qualifying combat matches for heavyweight mechanical robots inside the specialized containment arena.</p>
+                        <span class="track-tag">Robotics</span>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 6 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">03:30 PM</div>
+                    <div class="timeline-content">
+                        <h3>Symposium Awards Ceremony</h3>
+                        <p>Felicitation of winners across all 35+ technical categories, distribution of cash rewards, and closing address.</p>
+                        <span class="track-tag">Awards</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 VIT TechFest. All rights reserved. Designed for College Event DevOps.</p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="js/script.js"></script>
+</body>
+</html>

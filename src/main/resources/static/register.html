@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | VIT TechFest 2026</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-laptop-code"></i>
+            <span>VIT TechFest</span>
+        </div>
+        <button class="menu-btn" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="speakers.html">Speakers</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="tasks.html">Tasks</a></li>
+            <li><a href="register.html" class="active" style="background:#38bdf8; padding:8px 20px; border-radius:20px; color:white;">Register</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="section-header">
+                <h1>Symposium Registration</h1>
+                <p>Secure your slot at VIT TechFest 2026. Select your ticket class below and calculate your final price.</p>
+            </div>
+
+            <!-- Registration Form Card -->
+            <div class="form-card" style="max-width: 600px; margin: 0 auto;">
+                <form id="register-form" novalidate>
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="reg-name" class="form-label">Full Name</label>
+                        <input type="text" id="reg-name" class="form-control" placeholder="Enter your full name" required>
+                        <div class="invalid-feedback">Please enter your name.</div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="reg-email" class="form-label">Email Address</label>
+                        <input type="email" id="reg-email" class="form-control" placeholder="Enter your college email address" required>
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="reg-phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="reg-phone" class="form-control" placeholder="Enter your contact number" required>
+                        <div class="invalid-feedback">Please enter your phone number.</div>
+                    </div>
+
+                    <!-- Ticket Type -->
+                    <div class="form-group">
+                        <label for="ticket-type" class="form-label">Ticket Type</label>
+                        <select id="ticket-type" class="form-control" required>
+                            <option value="500" selected>Basic Pass (All Keynotes & 2 Events) - ₹500</option>
+                            <option value="1000">Pro Pass (All Keynotes, Workshops & 5 Events) - ₹1,000</option>
+                            <option value="1500">HackFest Pass (All Keynotes, HackFest Access & meals) - ₹1,500</option>
+                        </select>
+                    </div>
+
+                    <!-- Ticket Quantity -->
+                    <div class="form-group">
+                        <label for="ticket-quantity" class="form-label">Ticket Quantity</label>
+                        <input type="number" id="ticket-quantity" class="form-control" min="1" max="10" value="1" required>
+                        <div class="invalid-feedback">Quantity must be between 1 and 10.</div>
+                    </div>
+
+                    <!-- Ticket Price Info Display -->
+                    <div class="pricing-info">
+                        <span>Total Price:</span>
+                        <h3 id="total-price">₹500</h3>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="form-btn">Confirm Registration</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 VIT TechFest. All rights reserved. Designed for College Event DevOps.</p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="js/script.js"></script>
+</body>
+</html>

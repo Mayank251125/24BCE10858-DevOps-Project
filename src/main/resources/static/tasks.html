@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks | DevOps Observability</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-tasks"></i>
+            <span>Task Manager</span>
+        </div>
+        <button class="menu-btn" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="speakers.html">Speakers</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="tasks.html" class="active">Tasks</a></li>
+            <li><a href="register.html" style="background:#38bdf8; padding:8px 20px; border-radius:20px; color:white;">Register</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="section-header">
+                <h1>Task Manager Dashboard</h1>
+                <p>Add, complete, and delete your DevOps sprint tasks. All interactions dynamically push metrics to Graphite telemetry.</p>
+            </div>
+
+            <!-- Task Form and List Grid -->
+            <div class="task-grid" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: start;">
+                
+                <!-- Add Task Form -->
+                <div class="form-card" style="margin: 0; width: 100%;">
+                    <h2 style="font-size: 20px; margin-bottom: 20px; color: #38bdf8;"><i class="fas fa-plus-circle"></i> Add New Task</h2>
+                    <form id="task-form" novalidate>
+                        <!-- Title -->
+                        <div class="form-group">
+                            <label for="task-title" class="form-label">Task Title</label>
+                            <input type="text" id="task-title" class="form-control" placeholder="Enter task title" required>
+                            <div class="invalid-feedback">Task title is required.</div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label for="task-desc" class="form-label">Description</label>
+                            <textarea id="task-desc" class="form-control" rows="4" placeholder="Enter task details" style="resize: none;" required></textarea>
+                            <div class="invalid-feedback">Task description is required.</div>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="form-btn">Add Task</button>
+                    </form>
+                </div>
+
+                <!-- Task List Container -->
+                <div class="task-list-container" style="background: #1e293b; border-radius: 20px; padding: 40px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 15px;">
+                        <h2 style="font-size: 20px;"><i class="fas fa-list-ul" style="color: #38bdf8;"></i> Active Tasks</h2>
+                        <span id="active-count" style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">0 Tasks</span>
+                    </div>
+
+                    <!-- Tasks List -->
+                    <div id="tasks-list" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div class="loading-state" style="text-align: center; color: #94a3b8; padding: 20px;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 28px; margin-bottom: 10px; color: #38bdf8;"></i>
+                            <p>Loading tasks from Spring Boot backend...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 TaskManager Application. All rights reserved. Configured for Use Case 2.</p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="js/script.js"></script>
+</body>
+</html>
