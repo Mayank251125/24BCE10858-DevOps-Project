@@ -55,7 +55,13 @@ public class GraphiteConfiguration {
 
     @Bean
     public GraphiteMeterRegistry graphiteMeterRegistry(GraphiteConfig config) {
-        // Register the Graphite reporter into Spring Boot's Micrometer global registry
-        return new GraphiteMeterRegistry(config, Clock.SYSTEM);
+        GraphiteMeterRegistry registry = new GraphiteMeterRegistry(config, Clock.SYSTEM);
+        
+        // Explicitly bind JVM and System metric binders to ensure they are registered
+        new io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics().bindTo(registry);
+        new io.micrometer.core.instrument.binder.jvm.JvmGcMetrics().bindTo(registry);
+        new io.micrometer.core.instrument.binder.system.ProcessorMetrics().bindTo(registry);
+        
+        return registry;
     }
 }
