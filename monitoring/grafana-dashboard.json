@@ -252,11 +252,11 @@
       },
       "targets": [
         {
-          "target": "tomcat.global.sent",
+          "target": "tomcat.global.sent.name.*.count",
           "refId": "A"
         },
         {
-          "target": "tomcat.global.received",
+          "target": "tomcat.global.received.name.*.count",
           "refId": "B"
         }
       ],
