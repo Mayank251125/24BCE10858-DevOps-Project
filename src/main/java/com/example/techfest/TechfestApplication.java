@@ -1,12 +1,12 @@
-package com.example.taskmanager;
+package com.example.techfest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TaskmanagerApplication {
+public class TechfestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaskmanagerApplication.class, args);
+        SpringApplication.run(TechfestApplication.class, args);
     }
 }

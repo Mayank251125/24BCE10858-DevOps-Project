@@ -1,4 +1,4 @@
-package com.example.taskmanager.model;
+package com.example.techfest.model;
 
 public class Task {
     private Long id;

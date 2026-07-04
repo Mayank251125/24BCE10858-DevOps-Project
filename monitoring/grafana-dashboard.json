@@ -29,10 +29,13 @@
       "id": 1,
       "title": "HTTP Availability Status",
       "type": "stat",
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
       "targets": [
         {
-          "expr": "probe_success{instance=\"http://localhost:30080\"}",
+          "target": "tomcat.sessions.active.current",
           "refId": "A"
         }
       ],
@@ -42,10 +45,6 @@
             {
               "options": {
                 "0": {
-                  "color": "red",
-                  "text": "DOWN"
-                },
-                "1": {
                   "color": "green",
                   "text": "UP"
                 }
@@ -74,21 +73,21 @@
         "y": 0
       },
       "id": 2,
-      "title": "Application Uptime",
+      "title": "Active Tomcat Sessions",
       "type": "stat",
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
       "targets": [
         {
-          "expr": "time() - process_start_time_seconds{job=\"kubernetes-pods\"}",
+          "target": "tomcat.sessions.active.current",
           "refId": "A"
         }
       ],
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "textMode": "auto"
-          },
-          "unit": "s"
+          "unit": "none"
         }
       }
     },
@@ -101,20 +100,23 @@
         "y": 0
       },
       "id": 3,
-      "title": "Disk Usage Percentage",
+      "title": "Available CPU Cores",
       "type": "gauge",
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
       "targets": [
         {
-          "expr": "node_filesystem_free_bytes{mountpoint=\"/\"} / node_filesystem_size_bytes{mountpoint=\"/\"} * 100",
+          "target": "system.cpu.count",
           "refId": "A"
         }
       ],
       "fieldConfig": {
         "defaults": {
           "min": 0,
-          "max": 100,
-          "unit": "percent"
+          "max": 16,
+          "unit": "none"
         }
       }
     },
@@ -129,11 +131,13 @@
       "id": 4,
       "title": "CPU Usage (System Core Load)",
       "type": "timeseries",
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
       "targets": [
         {
-          "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
-          "legendFormat": "CPU Load",
+          "target": "scale(system.cpu.usage, 100)",
           "refId": "A"
         }
       ],
@@ -156,13 +160,15 @@
         "y": 4
       },
       "id": 5,
-      "title": "Memory Usage (RAM)",
+      "title": "Memory Usage (JVM Used)",
       "type": "timeseries",
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
       "targets": [
         {
-          "expr": "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / 1024 / 1024",
-          "legendFormat": "Used RAM (MB)",
+          "target": "scale(sumSeries(jvm.memory.used.area.heap.id.*), 0.00000095367)",
           "refId": "A"
         }
       ],
@@ -178,24 +184,79 @@
     {
       "collapsed": false,
       "gridPos": {
-        "h": 8,
-        "w": 24,
+        "h": 4,
+        "w": 8,
         "x": 0,
         "y": 12
       },
       "id": 6,
-      "title": "Network Traffic (I/O)",
-      "type": "timeseries",
-      "datasource": "Prometheus",
+      "title": "Application Uptime",
+      "type": "stat",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
       "targets": [
         {
-          "expr": "rate(node_network_receive_bytes_total[5m])",
-          "legendFormat": "Network In (Bytes/s)",
+          "target": "process.uptime",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 12
+      },
+      "id": 7,
+      "title": "Free Disk Space",
+      "type": "gauge",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
+      "targets": [
+        {
+          "target": "disk.free.path.*",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decbytes"
+        }
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 12
+      },
+      "id": 8,
+      "title": "Network Traffic (Tomcat Bytes)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
+      "targets": [
+        {
+          "target": "tomcat.global.sent.name.*.count",
           "refId": "A"
         },
         {
-          "expr": "rate(node_network_transmit_bytes_total[5m])",
-          "legendFormat": "Network Out (Bytes/s)",
+          "target": "tomcat.global.received.name.*.count",
           "refId": "B"
         }
       ],
@@ -204,14 +265,14 @@
           "custom": {
             "drawStyle": "line"
           },
-          "unit": "Bps"
+          "unit": "decbytes"
         }
       }
     }
   ],
   "schemaVersion": 36,
   "style": "dark",
-  "tags": ["devops", "kubernetes", "monitoring"],
+  "tags": ["devops", "graphite", "monitoring"],
   "title": "VIT TechFest 2026 Observability Dashboard",
   "timezone": "browser",
   "weekStart": ""

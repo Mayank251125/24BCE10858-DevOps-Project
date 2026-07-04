@@ -1,6 +1,6 @@
-package com.example.taskmanager.service;
+package com.example.techfest.service;
 
-import com.example.taskmanager.model.Task;
+import com.example.techfest.model.Task;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.taskmanager.config;
+package com.example.techfest.config;
 
 import io.micrometer.core.instrument.Clock;
 import io.micrometer.graphite.GraphiteConfig;
@@ -6,6 +6,11 @@ import io.micrometer.graphite.GraphiteMeterRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
+import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics;
+import io.micrometer.core.instrument.binder.system.ProcessorMetrics;
+import io.micrometer.graphite.GraphiteProtocol;
+import io.micrometer.core.instrument.config.NamingConvention;
 import java.time.Duration;
 
 @Configuration
@@ -33,22 +38,50 @@ public class GraphiteConfiguration {
             }
 
             @Override
+            public GraphiteProtocol protocol() {
+                // Use PLAINTEXT protocol for port 2003
+                return GraphiteProtocol.PLAINTEXT;
+            }
+
+            @Override
             public Duration step() {
                 // Metric export frequency (10 seconds)
                 return Duration.ofSeconds(10);
             }
 
             @Override
+            public boolean graphiteTagsEnabled() {
+                // Disable tags so that metrics are exported as flat hierarchical paths
+                return false;
+            }
+
+            @Override
             public boolean enabled() {
-                // Only push metrics if GRAPHITE_HOST env var is set (e.g., inside Docker/K8s)
-                return System.getenv("GRAPHITE_HOST") != null;
+                // Enabled by default to push metrics to Graphite Carbon
+                return true;
             }
         };
     }
 
     @Bean
     public GraphiteMeterRegistry graphiteMeterRegistry(GraphiteConfig config) {
-        // Register the Graphite reporter into Spring Boot's Micrometer global registry
-        return new GraphiteMeterRegistry(config, Clock.SYSTEM);
+        GraphiteMeterRegistry registry = new GraphiteMeterRegistry(config, Clock.SYSTEM);
+        registry.config().namingConvention(NamingConvention.dot);
+        return registry;
+    }
+
+    @Bean
+    public JvmMemoryMetrics jvmMemoryMetrics() {
+        return new JvmMemoryMetrics();
+    }
+
+    @Bean
+    public JvmGcMetrics jvmGcMetrics() {
+        return new JvmGcMetrics();
+    }
+
+    @Bean
+    public ProcessorMetrics processorMetrics() {
+        return new ProcessorMetrics();
     }
 }

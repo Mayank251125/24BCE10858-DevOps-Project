@@ -1,88 +1,116 @@
 pipeline {
+
     agent any
 
     environment {
-        DOCKER_IMAGE = "vit-taskmanager-app"
-        DOCKER_TAG   = "${env.BUILD_NUMBER}"
-        REGISTRY     = "docker.io/library"
+        IMAGE_NAME = "vit-techfest-app"
+        IMAGE_TAG = "latest"
     }
 
     stages {
-        stage('Checkout Source') {
+
+        stage('Checkout Source Code') {
             steps {
-                echo 'Checking out source code from Git repository...'
+                echo "Checking out source code from GitHub..."
+                // Pointing to your repository and main branch
+                git branch: 'main',
+                    url: 'https://github.com/Mayank251125/24BCE10858-DevOps-Project.git'
             }
         }
 
-        stage('Maven Wrapper Compile') {
+        stage('Verify Tools') {
             steps {
-                echo 'Compiling Java classes and static web assets using Maven Wrapper...'
-                bat 'mvnw.cmd clean compile'
+                echo "Verifying Java..."
+                bat 'java -version'
+
+                echo "Verifying Maven Wrapper..."
+                bat 'mvnw.cmd -version'
+
+                echo "Verifying Docker..."
+                bat 'docker --version'
+
+                echo "Verifying Kubernetes..."
+                bat 'kubectl version --client'
             }
         }
 
-        stage('Maven Wrapper Tests') {
+        stage('Clean Project') {
             steps {
-                echo 'Executing Taskmanager Junit test suites...'
+                echo "Cleaning project..."
+                bat 'mvnw.cmd clean'
+            }
+        }
+
+        stage('Compile Project') {
+            steps {
+                echo "Compiling project..."
+                bat 'mvnw.cmd compile'
+            }
+        }
+
+        stage('Run Unit Tests') {
+            steps {
+                echo "Running unit tests..."
                 bat 'mvnw.cmd test'
+            }
+        }
+
+        stage('Package Application') {
+            steps {
+                echo "Packaging Spring Boot application..."
+                bat 'mvnw.cmd package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "Building multi-stage Docker image: ${DOCKER_IMAGE}:${DOCKER_TAG}..."
-                bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} -t ${DOCKER_IMAGE}:latest ."
+                echo "Building Docker image..."
+                bat "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
 
-        stage('Integration Testing') {
+        stage('List Docker Images') {
             steps {
-                echo 'Launching test container to verify API availability...'
-                // Boot Task Manager container temporarily on host port 8888
-                bat "docker run -d --name test_app -p 8888:8081 ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                
-                // Wait for Spring Boot application context to initialize
-                bat 'timeout /t 12 > nul'
-
-                script {
-                    try {
-                        echo 'Verifying Task REST API endpoint response...'
-                        // Query the REST endpoint /api/tasks to ensure it returns status code 200
-                        bat 'powershell -Command "(Invoke-WebRequest -Uri http://localhost:8888/api/tasks -UseBasicParsing).StatusCode"'
-                        echo 'Testing passed! TaskManager API is online and returning task records.'
-                    } catch (Exception e) {
-                        echo "Testing failed: ${e.getMessage()}"
-                        error "HTTP Check failed. Spring Boot REST services are unreachable."
-                    } finally {
-                        echo 'Cleaning up test container...'
-                        bat 'docker stop test_app'
-                        bat 'docker rm test_app'
-                    }
-                }
+                echo "Available Docker Images"
+                bat 'docker images'
             }
         }
 
-        stage('Push to Registry') {
+        stage('Deploy to Kubernetes') {
             steps {
-                echo 'Simulating pushing image to Docker Hub...'
-                bat "echo Pushed ${DOCKER_IMAGE}:${DOCKER_TAG} to registry."
+                echo "Deploying application to Kubernetes..."
+                bat 'kubectl apply -f k8s/deployment.yaml'
+                bat 'kubectl apply -f k8s/service.yaml'
             }
         }
 
-        stage('Kubernetes Deployment') {
+        stage('Verify Deployment') {
             steps {
-                echo 'Simulating deployment rollout to Kubernetes...'
-                bat "echo Deployed to Kubernetes cluster on nodeport port 30080."
+                echo "Checking Deployment..."
+                bat 'kubectl rollout status deployment/vit-techfest-deployment'
+                bat 'kubectl get deployments'
+                bat 'kubectl get pods'
+                bat 'kubectl get svc'
             }
         }
+
     }
 
     post {
+        always {
+            echo "Pipeline Finished."
+        }
         success {
-            echo 'Pipeline completed successfully! TaskManager service is live.'
+            echo "======================================="
+            echo "BUILD SUCCESSFUL"
+            echo "Application Deployed Successfully"
+            echo "======================================="
         }
         failure {
-            echo 'Pipeline failed. Please inspect console build logs.'
+            echo "======================================="
+            echo "BUILD FAILED"
+            echo "Check Jenkins Console Output"
+            echo "======================================="
         }
     }
 }
